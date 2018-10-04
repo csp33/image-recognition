@@ -70,8 +70,9 @@ categories = os.listdir(parameters.TRAINING_FOLDER)
 prediction=result[0][0]
 prediction_idx=0
 
-for i in range(1,len(result[0])-1):
-    if prediction > result[0][i]:
+
+for i in range(1,len(result[0])):
+    if prediction < result[0][i]:
         prediction=result[0][i]
         prediction_idx=i
 
