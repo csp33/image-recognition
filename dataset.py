@@ -4,7 +4,6 @@ import glob
 from sklearn.utils import shuffle
 import numpy as np
 
-
 def load_train(train_path, img_size, categories):
     # Create the arrays
     images = []
@@ -17,6 +16,7 @@ def load_train(train_path, img_size, categories):
         index = categories.index(field)
         path = os.path.join(train_path, field, '*g')
         files = glob.glob(path)
+        print("Reading {} images...".format(field))
         # For each img
         for file in files:
             image = cv2.imread(file)
@@ -31,12 +31,13 @@ def load_train(train_path, img_size, categories):
             flbase = os.path.basename(file)
             img_names.append(flbase)
             description.append(field)
-        images = np.array(images)
-        labels = np.array(labels)
-        img_names = np.array(img_names)
-        description = np.array(description)
 
-        return images, labels, img_names, description
+    images = np.array(images)
+    labels = np.array(labels)
+    img_names = np.array(img_names)
+    description = np.array(description)
+
+    return images, labels, img_names, description
 
 
 class Dataset(object):
@@ -85,7 +86,7 @@ class Dataset(object):
             self._completed_epochs += 1
             start = 0
             self._index_in_epoch = batch_size
-            #assert batch_size <= self._num_examples
+            assert batch_size <= self._num_examples
         end = self._index_in_epoch
 
         return self._images[start:end], self._labels[start:end], self._img_names[start:end], self._description[start:end]
@@ -102,7 +103,8 @@ def read_train_set(train_path, img_size, categories, val_size):
         images, labels, img_names, description)
 
     # Number of validation images.
-    val_size = int(val_size * images.shape[0])
+    if isinstance(val_size, float):
+        val_size = int(val_size * images.shape[0])
 
     # From 0 to val_size -> Validation images
     val_images = images[:val_size]
