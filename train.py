@@ -114,7 +114,7 @@ def train(num_iteration):
             epoch = int(i / int(data.train.num_examples/batch_size))
 
             show_progress(epoch, feed_dict_tr, feed_dict_val, val_loss)
-            saver.save(session, './image_recognition')
+            saver.save(session, './saver/image_recognition')
 
 
     total_iterations += num_iteration
@@ -122,7 +122,7 @@ def train(num_iteration):
 
 # Finally, execute the script
 
-train(num_iteration=3000)
+train(num_iteration=27000)
 
 
 # First step: data gathering and cleaning

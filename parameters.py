@@ -1,5 +1,6 @@
 
 TRAINING_FOLDER = "./train_images"
+TEST_FOLDER="./test_images"
 IMG_SIZE = 128  # To be resized
 
 # Define network graph params

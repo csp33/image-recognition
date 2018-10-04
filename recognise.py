@@ -40,11 +40,11 @@ session = tf.Session()
 
 # Then, recreate the network graph
 
-saver = tf.train.import_meta_graph('image_recognition.meta')
+saver = tf.train.import_meta_graph('./saver/image_recognition.meta')
 
 # Now, restore the checkpoint
 
-saver.restore(session, tf.train.latest_checkpoint('./'))
+saver.restore(session, tf.train.latest_checkpoint('./saver'))
 
 # Load the graph
 

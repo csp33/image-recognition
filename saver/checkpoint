@@ -1,0 +1,2 @@
+model_checkpoint_path: "image_recognition"
+all_model_checkpoint_paths: "image_recognition"
