@@ -122,7 +122,7 @@ def train(num_iteration):
 
 # Finally, execute the script
 
-train(num_iteration=27000)
+train(num_iteration=100000)
 
 
 # First step: data gathering and cleaning
