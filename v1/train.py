@@ -23,7 +23,7 @@ data = dataset.read_train_set(
 
 print("Input data succesfully read.")
 print("Number of training files: {}".format(len(data.train.labels)))
-print("Number of validation files: {}".format(len(data.train.labels)))
+print("Number of validation files: {}".format(len(data.valid.labels)))
 
 
 # Create the placeholders
