@@ -6,7 +6,7 @@ import os
 import numpy
 import dataset  # To manage the datasets
 import parameters  # Configurable file
-import cnn  # CNN creation utility
+import cnn  # CNN creation tools
 
 from numpy.random import seed
 seed(1)
