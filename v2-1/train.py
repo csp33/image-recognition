@@ -23,7 +23,7 @@ data = dataset.read_train_set(
 
 print("Input data succesfully read.")
 print("Number of training files: {}".format(len(data.train.labels)))
-print("Number of validation files: {}".format(len(data.valid.labels)))
+print("Number of validation files: {}".format(len(data.train.labels)))
 
 
 # Create the placeholders
@@ -85,6 +85,7 @@ def show_progress(epoch, feed_dict_train, feed_dict_validate, val_loss):
     print(parameters.MSG.format(epoch + 1, acc, val_acc, val_loss))
 
 
+
 saver = tf.train.Saver()
 
 # Let's train the net:
@@ -108,7 +109,6 @@ def train(num_iteration):
             epoch = int(i / int(data.train.num_examples / batch_size))
             show_progress(epoch, feed_dict_tr, feed_dict_val, val_loss)
             saver.save(session, './saver/image_recognition')
-
 
 
 # Finally, execute the script
