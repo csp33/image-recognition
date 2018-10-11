@@ -92,7 +92,7 @@ plt.show()
 
 ######## Model saving #########
 
-model.save('image_recognition.h5')
+model.save('./saver/image_recognition.h5')
 
 ###############################
 
