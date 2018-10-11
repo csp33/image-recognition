@@ -23,3 +23,13 @@ def get_dataset():
         batch_size=parameters.BATCH_SIZE,
         class_mode='categorical')
     return train_generator, validation_generator
+
+
+def get_test_generator():
+    test_datagen = ImageDataGenerator(rescale=1. / 255)
+    test_generator = validation_datagen.flow_from_directory(
+        parameters.TEST_FOLDER,
+        target_size=(parameters.IMG_SIZE, parameters.IMG_SIZE),
+        batch_size=parameters.BATCH_SIZE,
+        class_mode='categorical')
+    return test_generator
