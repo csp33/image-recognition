@@ -10,6 +10,7 @@ import dataset # Function to get the training & validation data
 import parameters  # Configurable file
 from numpy.random import seed
 
+
 # Print the Keras framework version used
 
 print(keras.__version__)
@@ -35,10 +36,13 @@ model.add(Dense(units=1, activation='sigmoid'))
 
 ###############################
 
-# Model compilation
+##### Model compulation #######
+
 model.compile(loss='mean_squared_error',
               optimizer=SGD(lr=parameters.LEARNING_RATE, momentum=0.0),
               metrics=['accuracy'])
+
+###############################
 
 ####### Model training ########
 

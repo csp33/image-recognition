@@ -5,6 +5,7 @@
 ###########################################################################
 # 15 % of the images
 
+cd train_images;
 find . -type f -exec dirname {} + | uniq -c |
 while read n d;do
   echo "Directory:$d Files:$n Moving first:$(($n / 15))";
