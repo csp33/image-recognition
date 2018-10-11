@@ -97,8 +97,7 @@ plt.title('model accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
-plt.show()
-
+plt.savefig('accuracy.png')
 # Loss
 
 plt.plot(history.history['loss'])
@@ -107,7 +106,7 @@ plt.title('model loss')
 plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
-plt.show()
+plt.savefig('loss.png')
 
 
 ######## Model saving #########
