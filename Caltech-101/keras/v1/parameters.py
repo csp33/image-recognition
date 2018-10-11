@@ -2,8 +2,8 @@
 TRAINING_FOLDER = "./train_images"
 VALIDATION_FOLDER = "./validation_images"
 TEST_FOLDER = "./test_images"
-IMG_SIZE = 128  # To be resized
+IMG_SIZE = 64  # To be resized
 
-BATCH_SIZE = 100
-EPOCHS = 30
-LEARNING_RATE = 0.1
+BATCH_SIZE = 32
+EPOCHS = 25
+LEARNING_RATE = 1e-3
