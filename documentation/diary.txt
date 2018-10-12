@@ -1,0 +1,8 @@
+1st -> Familiarize with TensorFlow.
+2nd -> Try with Caltech-101 -> 34.5% success rate
+3rd -> Jump to Caltech-256 + Google Cloud -> 0.39% success rate
+4th -> Reduce iterations on Caltech-256 -> 14.67% success rate
+5th -> Decide to work on Caltech-101 and local machine
+6th -> Jump to Keras. Start to develop the model.
+7th -> Shape error. Class_mode=binary works with two classes (61% accuracy) but fails with the whole dataset (0.52% accuracy)
+
