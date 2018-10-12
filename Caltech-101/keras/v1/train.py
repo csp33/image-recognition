@@ -1,11 +1,10 @@
 import keras  # Keras framework
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'  # Disable TF info logs.
-
 ######## Keras components ##########
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Conv2D, MaxPooling2D, Flatten
-from keras.optimizers import SGD, RMSprop, Adam
+from keras.layers import Dense
+from keras.optimizers import SGD
 ###################################
 import matplotlib.pyplot as plt
 import dataset  # Function to get the training & validation data
@@ -26,8 +25,9 @@ num_validation_samples = len(validation_generator.filenames)
 train_steps = num_train_samples // parameters.BATCH_SIZE
 validation_steps = num_validation_samples // parameters.BATCH_SIZE
 
-####### Model creation ########
 
+####### Model creation ########
+"""
 model = Sequential()
 
 # Input layer
@@ -52,13 +52,14 @@ model.add(Dense(units=128, activation='relu'))
 # Output layer
 
 model.add(Dense(units=1, activation='sigmoid'))
-
 """
+#print(train_generator[0][0][0].shape)
+
+shape=train_generator[0][0][0].shape
 model = Sequential()
-model.add(Dense(320, activation='sigmoid', input_shape=(784,)))
-model.add(Dense(num_classes, activation='sigmoid'))
-
-"""
+model.add(Dense(320, activation='sigmoid', input_shape=shape))
+#model.add(Flatten())
+model.add(Dense(len(train_generator.class_indices), activation='sigmoid'))
 ###############################
 
 
