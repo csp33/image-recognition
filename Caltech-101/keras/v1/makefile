@@ -1,9 +1,9 @@
 
 train :
-	python train.py
+	python3.6 train.py
 
-test_all :
-	./test_all.sh
-	
+evaluate :
+	python3.6 evaluate.py
+
 clean :
 	rm ./saver/*

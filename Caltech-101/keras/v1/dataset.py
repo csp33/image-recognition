@@ -44,7 +44,7 @@ of directory for it to work correctly.
 
 
 def get_test_generator():
-    test_generator = validation_datagen.flow_from_directory(
+    test_generator = test_datagen.flow_from_directory(
         parameters.TEST_FOLDER,
         target_size=(parameters.IMG_SIZE, parameters.IMG_SIZE),
         batch_size=parameters.BATCH_SIZE,

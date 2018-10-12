@@ -1,4 +1,4 @@
-from tensorflow import keras  # Keras framework
+import keras  # Keras framework
 
 ######## Keras components ##########
 from keras.models import Sequential
@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import dataset  # Function to get the training & validation data
 import parameters  # Configurable file
 from numpy.random import seed
-
+import time # To print the date in the output file
 
 # Print the Keras framework version used
 
@@ -23,7 +23,6 @@ train_generator, validation_generator = dataset.get_dataset()
 num_train_samples = len(train_generator.filenames)
 num_validation_samples = len(validation_generator.filenames)
 
-test = dataset.get_test_generator()
 ####### Model creation ########
 
 model = Sequential()
@@ -65,7 +64,6 @@ model.compile(loss='mean_squared_error',
               optimizer=SGD(lr=parameters.LEARNING_RATE, momentum=0.0),
               metrics=['accuracy'])
 
-
 model.summary()
 
 ###############################
@@ -77,52 +75,39 @@ history = model.fit_generator(
     steps_per_epoch=num_train_samples // parameters.BATCH_SIZE,
     epochs=parameters.EPOCHS,
     validation_data=validation_generator,
-    validation_steps=num_validation_samples // parameters.BATCH_SIZE, verbose=1,
-    use_multiprocessing=True)
+    validation_steps=num_validation_samples // parameters.BATCH_SIZE, verbose=1)
 
 ###############################
 
-# Free some memory
-
-del train_generator
-del validation_generator
 
 ############ Plots ############
 
 # Accuracy
 
+current_time=time.strftime("%d/%m/%Y %H:%M:%S")
+current_date=time.strftime("%d_%m_%Y")
+
 plt.plot(history.history['acc'])
 plt.plot(history.history['val_acc'])
-plt.title('model accuracy')
-plt.ylabel('accuracy')
-plt.xlabel('epoch')
-plt.legend(['train', 'test'], loc='upper left')
-plt.savefig('accuracy.png')
+plt.title('Model accuracy ({})'.format(current_time))
+plt.ylabel('Accuracy')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Test'], loc='upper left')
+plt.savefig('{}/accuracy_{}.png'.format(parameters.STATS_PATH,current_date))
+plt.close()
 # Loss
 
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
-plt.title('model loss')
-plt.ylabel('loss')
-plt.xlabel('epoch')
-plt.legend(['train', 'test'], loc='upper left')
-plt.savefig('loss.png')
+plt.title('Model Loss ({})'.format(current_time))
+plt.ylabel('Loss')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Test'], loc='upper left')
+plt.savefig('{}/loss_{}.png'.format(parameters.STATS_PATH,current_date))
 
 
 ######## Model saving #########
 
-model.save('./saver/image_recognition.h5')
-
-###############################
-
-###### Model evaluation #######
-
-test_generator = parameters.get_test_generator()
-
-score = model.evaluate_generator(
-    test_generator, verbose=0,
-    use_multiprocessing=True)
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
+model.save(parameters.SAVER_PATH)
 
 ###############################
