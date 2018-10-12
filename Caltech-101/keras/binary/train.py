@@ -1,3 +1,5 @@
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1' #Disable TF info logs.
 import keras  # Keras framework
 
 ######## Keras components ##########
@@ -14,7 +16,7 @@ import time # To print the date in the output file
 
 # Print the Keras framework version used
 
-print(keras.__version__)
+print("Keras version: {}".format(keras.__version__))
 
 # Load the dataset and set the variables
 

@@ -1,20 +1,21 @@
 import keras  # Keras framework
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'  # Disable TF info logs.
 
 ######## Keras components ##########
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Conv2D, MaxPooling2D, Flatten
 from keras.optimizers import SGD, RMSprop, Adam
-from keras.datasets import mnist
 ###################################
 import matplotlib.pyplot as plt
 import dataset  # Function to get the training & validation data
 import parameters  # Configurable file
 from numpy.random import seed
-import time # To print the date in the output file
+import time  # To print the date in the output file
 
 # Print the Keras framework version used
 
-print(keras.__version__)
+print("Keras version: {}".format(keras.__version__))
 
 # Load the dataset and set the variables
 
@@ -22,6 +23,8 @@ train_generator, validation_generator = dataset.get_dataset()
 
 num_train_samples = len(train_generator.filenames)
 num_validation_samples = len(validation_generator.filenames)
+train_steps = num_train_samples // parameters.BATCH_SIZE
+validation_steps = num_validation_samples // parameters.BATCH_SIZE
 
 ####### Model creation ########
 
@@ -71,11 +74,9 @@ model.summary()
 ####### Model training ########
 
 history = model.fit_generator(
-    train_generator,
-    steps_per_epoch=num_train_samples // parameters.BATCH_SIZE,
-    epochs=parameters.EPOCHS,
-    validation_data=validation_generator,
-    validation_steps=num_validation_samples // parameters.BATCH_SIZE, verbose=1)
+    train_generator, steps_per_epoch=train_steps, epochs=parameters.EPOCHS,
+    validation_data=validation_generator, validation_steps=validation_steps,
+    verbose=1)
 
 ###############################
 
@@ -84,8 +85,8 @@ history = model.fit_generator(
 
 # Accuracy
 
-current_time=time.strftime("%d/%m/%Y %H:%M:%S")
-current_date=time.strftime("%d_%m_%Y")
+current_time = time.strftime("%d/%m/%Y %H:%M:%S")
+current_date = time.strftime("%d_%m_%Y")
 
 plt.plot(history.history['acc'])
 plt.plot(history.history['val_acc'])
@@ -93,7 +94,7 @@ plt.title('Model Accuracy ({})'.format(current_time))
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
-plt.savefig('{}/accuracy_{}.png'.format(parameters.STATS_PATH,current_date))
+plt.savefig('{}/accuracy_{}.png'.format(parameters.STATS_PATH, current_date))
 plt.close()
 # Loss
 
@@ -103,7 +104,7 @@ plt.title('Model Loss ({})'.format(current_time))
 plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
-plt.savefig('{}/loss_{}.png'.format(parameters.STATS_PATH,current_date))
+plt.savefig('{}/loss_{}.png'.format(parameters.STATS_PATH, current_date))
 
 
 ######## Model saving #########

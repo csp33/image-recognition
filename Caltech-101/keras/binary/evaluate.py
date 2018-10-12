@@ -1,3 +1,5 @@
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1' #Disable TF info logs.
 from keras.models import load_model
 import parameters
 import dataset
@@ -5,11 +7,14 @@ import time
 
 
 # Load the model and the test generator
+try:
+    model = load_model(parameters.SAVER_PATH)
+except:
+    print("The model couldn't be loaded.")
+    exit(1)
 
-model = load_model(parameters.SAVER_PATH)
-print("Model succesfully loaded.")
 test_generator = dataset.get_test_generator()
-print("Test data succesfully loaded.")
+
 steps = len(test_generator.filenames) // parameters.BATCH_SIZE
 
 # Evaluate it

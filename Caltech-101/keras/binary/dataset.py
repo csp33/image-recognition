@@ -13,20 +13,27 @@ test_datagen = ImageDataGenerator(rescale=1. / 255)
 
 
 def get_dataset():
-    train_generator = train_datagen.flow_from_directory(
-        parameters.TRAINING_FOLDER,
-        # 128,128,3 ??
-        target_size=(parameters.IMG_SIZE, parameters.IMG_SIZE),
-        batch_size=parameters.BATCH_SIZE,
-        class_mode='binary')
-    # Should be categorical !!!
-
-    validation_generator = validation_datagen.flow_from_directory(
-        parameters.VALIDATION_FOLDER,
-        target_size=(parameters.IMG_SIZE, parameters.IMG_SIZE),
-        batch_size=parameters.BATCH_SIZE,
-        class_mode='binary')
-    # Should be categorical !!!
+    try:
+        train_generator = train_datagen.flow_from_directory(
+            parameters.TRAINING_FOLDER,
+            # 128,128,3 ??
+            target_size=(parameters.IMG_SIZE, parameters.IMG_SIZE),
+            batch_size=parameters.BATCH_SIZE,
+            class_mode='binary')
+        # Should be categorical !!!
+    except:
+        print("The training data couldn't be loaded.")
+        exit(1)
+    try:
+        validation_generator = validation_datagen.flow_from_directory(
+            parameters.VALIDATION_FOLDER,
+            target_size=(parameters.IMG_SIZE, parameters.IMG_SIZE),
+            batch_size=parameters.BATCH_SIZE,
+            class_mode='binary')
+        # Should be categorical !!!
+    except:
+        print("The validation data couldn't be loaded.")
+        exit(1)
     return train_generator, validation_generator
 
 
@@ -44,10 +51,14 @@ of directory for it to work correctly.
 
 
 def get_test_generator():
-    test_generator = test_datagen.flow_from_directory(
-        parameters.TEST_FOLDER,
-        target_size=(parameters.IMG_SIZE, parameters.IMG_SIZE),
-        batch_size=parameters.BATCH_SIZE,
-        class_mode='binary')
-    # Should be categorical !!!
+    try:
+        test_generator = test_datagen.flow_from_directory(
+            parameters.TEST_FOLDER,
+            target_size=(parameters.IMG_SIZE, parameters.IMG_SIZE),
+            batch_size=parameters.BATCH_SIZE,
+            class_mode='binary')
+        # Should be categorical !!!
+    except:
+        print("The validation data couldn't be loaded.")
+        exit(1)
     return test_generator
