@@ -34,33 +34,33 @@ x_test /= 255.
 model = Sequential()
 
 model.add(Conv2D(128, (3, 3), padding='same',
-                 input_shape=x_train.shape[1:]))
-model.add(Activation('elu'))
-model.add(Conv2D(128, (3, 3)))
-model.add(Activation('elu'))
+                 input_shape=x_train.shape[1:],activation='elu'))
+#model.add(Activation('elu'))
+model.add(Conv2D(128, (3, 3),activation='elu'))
+#model.add(Activation('elu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Conv2D(256, (3, 3), padding='same'))
-model.add(Activation('elu'))
-model.add(Conv2D(256, (3, 3)))
-model.add(Activation('elu'))
+model.add(Conv2D(256, (3, 3), padding='same',activation='elu'))
+#model.add(Activation('elu'))
+model.add(Conv2D(256, (3, 3),activation='elu'))
+#model.add(Activation('elu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
 
-model.add(Conv2D(512, (3, 3), padding='same'))
-model.add(Activation('elu'))
-model.add(Conv2D(512, (3, 3)))
-model.add(Activation('elu'))
+model.add(Conv2D(512, (3, 3), padding='same',activation='elu'))
+#model.add(Activation('elu'))
+model.add(Conv2D(512, (3, 3),activation='elu'))
+#model.add(Activation('elu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
 
 
 model.add(Flatten())
-model.add(Dense(1024))
-model.add(Activation('elu'))
+model.add(Dense(1024,activation='elu'))
+#model.add(Activation('elu'))
 model.add(Dropout(0.5))
-model.add(Dense(parameters.NUM_CLASSES))
-model.add(Activation('softmax'))
+model.add(Dense(parameters.NUM_CLASSES,activation='softmax'))
+#model.add(Activation('softmax'))
 
 # Compile the model & show the summary
 
@@ -69,7 +69,7 @@ model.compile(loss='categorical_crossentropy',
                                                  decay=1e-6),
               metrics=['accuracy'])
 model.summary()
-
+"""
 # This will do preprocessing and realtime data augmentation:
 datagen = ImageDataGenerator(
     featurewise_center=False,  # set input mean to 0 over the dataset
@@ -88,6 +88,17 @@ datagen = ImageDataGenerator(
 
 # Compute quantities required for feature-wise normalization
 # (std, mean, and principal components if ZCA whitening is applied).
+"""
+datagen = ImageDataGenerator(rotation_range=180,
+                             width_shift_range=0.1,
+                             height_shift_range=0.1,
+                             brightness_range=(0.1,0.8),
+                             shear_range=0.2,
+                             zoom_range=0.1,
+                             channel_shift_range=0.8,
+                             horizontal_flip=True,
+                             vertical_flip=True)
+
 datagen.fit(x_train)
 
 num_train_samples = x_train.shape[0]
@@ -95,12 +106,12 @@ num_validation_samples = x_test.shape[0]
 train_steps = num_train_samples // parameters.BATCH_SIZE
 validation_steps = num_validation_samples // parameters.BATCH_SIZE
 
-history=model.fit_generator(datagen.flow(x_train, y_train,
-                                 batch_size=parameters.BATCH_SIZE),
-                    steps_per_epoch=train_steps,
-                    epochs=parameters.EPOCHS,
-                    validation_data=(x_test, y_test),
-                    validation_steps=validation_steps)
+history = model.fit_generator(datagen.flow(x_train, y_train,
+                                           batch_size=parameters.BATCH_SIZE),
+                              steps_per_epoch=train_steps,
+                              epochs=parameters.EPOCHS,
+                              validation_data=(x_test, y_test),
+                              validation_steps=validation_steps)
 
 current_time = time.strftime("%d/%m/%Y %H:%M:%S")
 current_date = time.strftime("%d_%m_%Y")
@@ -126,7 +137,7 @@ plt.savefig('{}/loss_{}.png'.format(parameters.STATS_PATH, current_date))
 
 end = time.time()
 
-print("Elapsed time: {} seconds.".format(end-start))
+print("Elapsed time: {} seconds.".format(end - start))
 
 ######## Model saving #########
 
