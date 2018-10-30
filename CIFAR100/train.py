@@ -34,33 +34,26 @@ x_test /= 255.
 model = Sequential()
 
 model.add(Conv2D(128, (3, 3), padding='same',
-                 input_shape=x_train.shape[1:],activation='elu'))
-#model.add(Activation('elu'))
-model.add(Conv2D(128, (3, 3),activation='elu'))
-#model.add(Activation('elu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-
-model.add(Conv2D(256, (3, 3), padding='same',activation='elu'))
-#model.add(Activation('elu'))
-model.add(Conv2D(256, (3, 3),activation='elu'))
-#model.add(Activation('elu'))
+                 input_shape=x_train.shape[1:], activation='elu'))
+model.add(Conv2D(128, (3, 3), activation='elu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
 
-model.add(Conv2D(512, (3, 3), padding='same',activation='elu'))
-#model.add(Activation('elu'))
-model.add(Conv2D(512, (3, 3),activation='elu'))
-#model.add(Activation('elu'))
+model.add(Conv2D(256, (3, 3), padding='same', activation='elu'))
+model.add(Conv2D(256, (3, 3), activation='elu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))
+
+model.add(Conv2D(512, (3, 3), padding='same', activation='elu'))
+model.add(Conv2D(512, (3, 3), activation='elu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
 
 
 model.add(Flatten())
-model.add(Dense(1024,activation='elu'))
-#model.add(Activation('elu'))
+model.add(Dense(1024, activation='elu'))
 model.add(Dropout(0.5))
-model.add(Dense(parameters.NUM_CLASSES,activation='softmax'))
-#model.add(Activation('softmax'))
+model.add(Dense(parameters.NUM_CLASSES, activation='softmax'))
 
 # Compile the model & show the summary
 
@@ -69,7 +62,7 @@ model.compile(loss='categorical_crossentropy',
                                                  decay=1e-6),
               metrics=['accuracy'])
 model.summary()
-"""
+
 # This will do preprocessing and realtime data augmentation:
 datagen = ImageDataGenerator(
     featurewise_center=False,  # set input mean to 0 over the dataset
@@ -84,7 +77,8 @@ datagen = ImageDataGenerator(
     # randomly shift images vertically (fraction of total height)
     height_shift_range=0.1,
     horizontal_flip=True,  # randomly flip images
-    vertical_flip=False)  # randomly flip images
+    # vertical_flip=False)  # randomly flip images
+    vertical_flip=True)  # randomly flip images
 
 # Compute quantities required for feature-wise normalization
 # (std, mean, and principal components if ZCA whitening is applied).
@@ -98,7 +92,7 @@ datagen = ImageDataGenerator(rotation_range=180,
                              channel_shift_range=0.8,
                              horizontal_flip=True,
                              vertical_flip=True)
-
+"""
 datagen.fit(x_train)
 
 num_train_samples = x_train.shape[0]
