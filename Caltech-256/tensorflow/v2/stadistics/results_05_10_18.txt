@@ -1,1 +1,0 @@
-Correct predictions: 10 Incorrect predictions: 2560 Number of predictions: 2570

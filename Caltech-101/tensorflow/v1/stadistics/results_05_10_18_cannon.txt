@@ -1,1 +1,0 @@
-Correct predictions: 0 Incorrect predictions: 10 Number of predictions: 10

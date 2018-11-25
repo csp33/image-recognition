@@ -1,3 +1,0 @@
-Number of test files: 76
-Test loss: 0.23456446826457977
-Test accuracy: 0.625
