@@ -11,7 +11,6 @@ from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 import matplotlib.pyplot as plt
 
-
 start = time.time()
 
 # First, we must load the dataset
@@ -63,7 +62,7 @@ model.compile(loss='categorical_crossentropy',
               metrics=['accuracy'])
 model.summary()
 
-# This will do preprocessing and realtime data augmentation:
+# Preprocessing parameters:
 datagen = ImageDataGenerator(
     featurewise_center=False,  # set input mean to 0 over the dataset
     samplewise_center=False,  # set each sample mean to 0
@@ -80,19 +79,6 @@ datagen = ImageDataGenerator(
     # vertical_flip=False)  # randomly flip images
     vertical_flip=True)  # randomly flip images
 
-# Compute quantities required for feature-wise normalization
-# (std, mean, and principal components if ZCA whitening is applied).
-"""
-datagen = ImageDataGenerator(rotation_range=180,
-                             width_shift_range=0.1,
-                             height_shift_range=0.1,
-                             brightness_range=(0.1,0.8),
-                             shear_range=0.2,
-                             zoom_range=0.1,
-                             channel_shift_range=0.8,
-                             horizontal_flip=True,
-                             vertical_flip=True)
-"""
 datagen.fit(x_train)
 
 num_train_samples = x_train.shape[0]
@@ -107,7 +93,7 @@ history = model.fit_generator(datagen.flow(x_train, y_train,
                               validation_data=(x_test, y_test),
                               validation_steps=validation_steps)
 
-current_time = time.strftime("%d/%m/%Y %H:%M:%S")
+current_time = time.strftime("%d_%m_%Y %H:%M:%S")
 current_date = time.strftime("%d_%m_%Y")
 
 plt.plot(history.history['acc'])

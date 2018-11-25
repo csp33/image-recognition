@@ -17,7 +17,7 @@ if len(sys.argv) != 2:
     print("Usage: {} <image>".format(sys.argv[0]))
     exit(1)
 
-def c100_classify(image, model):
+def predict(image, model):
     label_list_path = 'datasets/cifar-100-python/meta'
     keras_dir = os.path.expanduser(os.path.join('~', '.keras'))
     datadir_base = os.path.expanduser(keras_dir)
@@ -36,7 +36,7 @@ def c100_classify(image, model):
     return pred[:5]
 
 
-# Load the model and the test generator
+# Load the model
 try:
     model = load_model(parameters.SAVER_PATH)
 except:
@@ -47,7 +47,7 @@ image = image.load_img(sys.argv[1], target_size=(
     parameters.IMG_SIZE, parameters.IMG_SIZE))
 image_small = misc.imresize(
     image, (parameters.IMG_SIZE, parameters.IMG_SIZE, 3)) / 255.
-pred = c100_classify(image_small, model)
+pred = predict(image_small, model)
 data = [{'name': x, 'probability': y}
         for x, y in zip(pred.iloc[:, 1], pred.iloc[:, 0])]
 

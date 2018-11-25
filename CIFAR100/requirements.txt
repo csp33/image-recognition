@@ -3,3 +3,4 @@ tensorflow-gpu
 sklearn
 matplotlib
 pillow
+keras
