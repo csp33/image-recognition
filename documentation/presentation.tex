@@ -1,0 +1,166 @@
+\documentclass{beamer}
+\usepackage[outputdir=build]{minted}
+\usepackage[skins,minted,breakable]{tcolorbox}
+\usepackage[english]{babel}
+\usepackage{subcaption}
+\usetikzlibrary{matrix,backgrounds}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{adjustbox}
+\usepackage{soul}
+\usepackage{graphicx}% http://ctan.org/pkg/graphicx
+\usepackage{booktabs}% http://ctan.org/pkg/booktabs
+
+\graphicspath{ {./img/} }
+\selectlanguage{english}
+\usepackage[utf8]{inputenc}
+\usetheme{PaloAlto}
+\setbeamerfont{section in sidebar}{size=\fontsize{2}{4}\selectfont}
+\setbeamerfont{subsection in sidebar}{size=\fontsize{2}{3}\selectfont}
+\setbeamerfont{subsubsection in sidebar}{size=\fontsize{2}{2}\selectfont}
+
+\setbeamerfont{section in toc}{size=\footnotesize}
+\setbeamerfont{subsection in toc}{size=\scriptsize}
+\setbeamerfont{subsubsection in toc}{size=\tiny}
+
+\usetikzlibrary{arrows,positioning,automata,shadows,fit,shapes,calc}
+
+
+
+\title{Media Informatic Systems}
+\date{$7^{th}$ December 2018}
+\subtitle{Image recognition task}
+
+\author{Carlos Sánchez Páez}
+
+\makeatletter
+  \setbeamertemplate{sidebar \beamer@sidebarside}%{sidebar theme}
+  {
+    \beamer@tempdim=\beamer@sidebarwidth%
+    \advance\beamer@tempdim by -6pt%
+    \insertverticalnavigation{\beamer@sidebarwidth}%
+    \vfill
+    \ifx\beamer@sidebarside\beamer@lefttext%
+    \else%
+      \usebeamercolor{normal text}%
+      \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+      \vskip2pt%
+    \fi%
+}%
+\makeatother
+
+\subject{Media Informatic Systems}
+\AtBeginSection[]
+  {
+     \begin{frame}<beamer>
+     \frametitle{Index}
+     \tableofcontents[currentsection]
+     \end{frame}
+  }
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>{Index}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+\AtBeginSubsubsection[]
+{
+  \begin{frame}<beamer>{Index}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+% Let's get started
+\begin{document}
+\centering
+\begin{frame}
+ \titlepage
+\end{frame}
+
+\begin{frame}{Index}
+ \tableofcontents
+ % You might wish to add the option [pausesections]
+\end{frame}
+
+\section{Description of the task}
+
+\section{Dataset}
+\begin{frame}[fragile]{CIFAR100}
+ \begin{enumerate}
+  \item<+-> 60 000 32x32 colour images (RGB).
+  \item<+-> 100 classes.
+  \item<+-> 600 images per class.
+        \begin{enumerate}
+         \item<+-> 500 training.
+         \item<+-> 100 testing.
+        \end{enumerate}
+  \item<+-> Best accuracy: 75.72\%
+ \end{enumerate}
+
+\end{frame}
+
+\begin{frame}[fragile]{CIFAR100}
+ \begin{table}
+  \centering
+  \begin{tabular}{|c|c|}
+   \hline
+   aquatic mammals                & beaver, dolphin, otter, seal, whale                   \\
+   \hline
+   fish                           & aquarium fish, flatfish, ray, shark, trout            \\
+   \hline
+
+   flowers                        & orchids, poppies, roses, sunflowers, tulips           \\
+   \hline
+   food containers                & bottles, bowls, cans, cups, plates                    \\
+   \hline
+   fruit and vegetables           & apples, mushrooms, oranges, pears, sweet peppers      \\
+   \hline
+   household electrical devices   & clock, computer keyboard, lamp, telephone, television \\
+   \hline
+   household furniture            & bed, chair, couch, table, wardrobe                    \\
+   \hline
+   insects                        & bee, beetle, butterfly, caterpillar, cockroach        \\
+   \hline
+   large carnivores               & bear, leopard, lion, tiger, wolf                      \\
+   \hline
+   large man-made outdoor things  & bridge, castle, house, road, skyscraper               \\
+   \hline
+   large natural outdoor scenes   & cloud, forest, mountain, plain, sea                   \\
+   \hline
+   large omnivores and herbivores & camel, cattle, chimpanzee, elephant, kangaroo         \\
+   \hline
+   medium-sized mammals           & fox, porcupine, possum, raccoon, skunk                \\
+   \hline
+   non-insect invertebrates       & crab, lobster, snail, spider, worm                    \\
+   \hline
+   people                         & baby, boy, girl, man, woman                           \\
+   \hline
+   reptiles                       & crocodile, dinosaur, lizard, snake, turtle            \\
+   \hline
+   small mammals                  & hamster, mouse, rabbit, shrew, squirrel               \\
+   \hline
+   trees                          & maple, oak, palm, pine, willow                        \\
+   \hline
+   vehicles 1                     & bicycle, bus, motorcycle, pickup truck, train         \\
+   \hline
+   vehicles 2                     & lawn-mower, rocket, streetcar, tank, tractor          \\
+   \hline
+  \end{tabular}
+ \end{table}
+
+\end{frame}
+
+
+\section{Neural network development}
+
+\subsection{Preprocessing}
+
+\subsection{Structure of the net}
+
+\subsection{First version}
+
+\subsection{Final version}
+
+\section{Examples}
+
+\end{document}
