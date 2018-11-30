@@ -109,7 +109,7 @@
 \section{Dataset}
 \begin{frame}[fragile]{CIFAR100}
  \begin{enumerate}
-  \item<+-> 60 000 32x32 colour images (RGB).
+  \item<+-> 60 000 32x32 color images (RGB).
   \item<+-> 100 classes.
   \item<+-> 600 images per class.
         \begin{enumerate}
@@ -124,8 +124,10 @@
 \begin{frame}[fragile]{Classes in the dataset}
  \begin{table}
   \centering
-  \scalebox{0.7}{
+  \scalebox{0.65}{
    \begin{tabular}{|c|c|}
+   \hline
+   \textbf{Superclass} & \textbf{Classes}\\
     \hline
     aquatic mammals                & beaver, dolphin, otter, seal, whale                   \\
     \hline
@@ -292,6 +294,13 @@
  \begin{figure}[H]
   \centering
   \includegraphics[scale=0.55]{img/accuracy_139.png}
+ \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{200 epochs training}
+ \begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.55]{img/loss.png}
  \end{figure}
 \end{frame}
 
