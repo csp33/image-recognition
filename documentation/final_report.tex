@@ -94,12 +94,12 @@ from keras.datasets import cifar100
 \section{Diary of work}
 
 \begin{enumerate}
-	\item \textbf{Familiarize with \emph{TensorFlow}}. The first thing I did was reading some \emph{TensorFlow} tutorials. Specifically, I developed a classifier which was able to distinguish between dogs and cats with the help of a tutorial. 
+	\item \textbf{Familiarize with \emph{TensorFlow}}. The first thing I did was reading some \emph{TensorFlow} tutorials. Specifically, I developed a classifier which was able to distinguish between dogs and cats with the help of a tutorial.
 	\item \textbf{Try to adapt the algorithm}. I thought about converting the dogs and cats classifier into a biger one, so I made the corresponding changes to use it with the \emph{Caltech-101} dataset. The main problem was that the number of images was too low for some categories. That is why I only achieved a 34.5\% success rate.
 	\item \textbf{Jump to Caltech-256}. As there were too few images in Caltech-101, I downloaded the Caltech-256 dataset and started to work with it. But I had the opposite problem: as there were too much images, my local PC memory was not enough. To fix this, I created a virtual machine using Google Cloud (30GB of RAM). After 8 hours of training, the accuracy that I achieved was  0.39\%. That is because the images for the categories were too similar and I did not apply any preprocessing.
 	\item \textbf{Decide to work with \emph{Caltech-101} and local PC}. As the results obtained in \emph{Caltech-256} were not good, I decided to center myself on \emph{Caltech-101}.
 	\item \textbf{Jump to \emph{Keras}}. In class, we saw a \emph{Keras} example. As I could see, the code was much more readable and easy to understand, so I started to recode the program using \emph{Keras} and \emph{Python 3.6}.
-	\item \textbf{Error with shapes}. I had a lot of problems with the input shapes of my images (I was importing local files directly to the program). I spent here more than a week trying to figure out the error. 
+	\item \textbf{Error with shapes}. I had a lot of problems with the input shapes of my images (I was importing local files directly to the program). I spent here more than a week trying to figure out the error.
 	\item \textbf{Dataset change}. Tired of spending time on the shape error, I decided to use the \emph{CIFAR100} dataset because the loading functions were already implemented.
 	\item \textbf{Parameters calibration}. I modified some parameters to make the model better, such as \emph{batch size} and \emph{preprocessing functions}.
 \end{enumerate}
@@ -112,16 +112,16 @@ To preprocess the images I use the \emph{ImageDataGenerator} Keras utility. It r
 \centering
 \begin{minted}[linenos=true,breaklines=true,tabsize=2]{python}
 datagen = ImageDataGenerator(
-    featurewise_center=False,  
-    samplewise_center=False,  
-    featurewise_std_normalization=False,  
-    samplewise_std_normalization=False, 
-    zca_whitening=False,  
+    featurewise_center=False,
+    samplewise_center=False,
+    featurewise_std_normalization=False,
+    samplewise_std_normalization=False,
+    zca_whitening=False,
     rotation_range=0,
     width_shift_range=0.1,
     height_shift_range=0.1,
-    horizontal_flip=True,  
-    vertical_flip=True) 
+    horizontal_flip=True,
+    vertical_flip=True)
 \end{minted}
 \caption{Preprocessing of the images.}
 \end{figure}
@@ -187,7 +187,7 @@ First, I trained the model with 200 epochs so that I could find the global maxim
 \caption{Accuracy and loss of the model (200 epochs)}
 \end{figure}
 
-We can see that the accuracy is around 60\%. Concretely, the maximum accuracy was 68.77\%, reached on epoch 139.\\
+We can see that the accuracy is around 60\%. Concretely, the maximum accuracy was 61.87\%, reached on epoch 139.\\
 
 With those results, I re-trained the model. It took 3:30 hours and the results were the following:
 
@@ -343,59 +343,59 @@ Let's run the model with different images retrieved from the Internet so that we
 
 \begin{thebibliography}{9}
 
-\bibitem{Keras documentation} 
+\bibitem{Keras documentation}
 Keras documentation
 \\\texttt{https://keras.io/}
 
-\bibitem{Moodle} 
+\bibitem{Moodle}
 Moodle
 \\\texttt{https://elearning.tmit.bme.hu/login/index.php}
 
-\bibitem{Tensorflow Tutorial} 
+\bibitem{Tensorflow Tutorial}
 Tensorflow Tutorial
 \\\texttt{https://cv-tricks.com/tensorflow-tutorial/training-convolutional\\-neural-network-for-image-classification/}
 
-\bibitem{Some Datasets} 
+\bibitem{Some Datasets}
 Some Datasets
 \\\texttt{https://www.analyticsvidhya.com/blog/2018/03/\\comprehensive-collection-deep-learning-datasets/}
 
 
-\bibitem{Understanding Convolutions} 
+\bibitem{Understanding Convolutions}
 Understanding Convolutions
 \\\texttt{https://towardsdatascience.com/intuitively-understanding\\-convolutions-for-deep-learning-1f6f42faee1}
 
-\bibitem{Deep neural net tutorial} 
+\bibitem{Deep neural net tutorial}
 Deep neural net tutorial
 \\\texttt{https://medium.com/@tifa2up/image-classification\\-using-deep-neural-networks-a-beginner-friendly-\\approach-using-tensorflow-94b0a090ccd4}
 
-\bibitem{Caltech-101 dataset} 
+\bibitem{Caltech-101 dataset}
 Caltech-101 dataset
 \\\texttt{http://www.vision.caltech.edu/Image\_Datasets/Caltech101/}
 
 
-\bibitem{Caltech-256 dataset} 
+\bibitem{Caltech-256 dataset}
 Caltech-256 dataset
 \\\texttt{http://www.vision.caltech.edu/Image\_Datasets/Caltech256/}
 
 
-\bibitem{TensorFlow tutorial} 
+\bibitem{TensorFlow tutorial}
 TensorFlow tutorial
 \\\texttt{https://cv-tricks.com/artificial-intelligence/deep-learning\\/deep-learning-frameworks/tensorflow/tensorflow-tutorial/}
 
-\bibitem{Basic classification tutorial with Tensorflow} 
+\bibitem{Basic classification tutorial with Tensorflow}
 Basic classification tutorial with Tensorflow
 \\\texttt{https://www.tensorflow.org/tutorials/keras/basic\_classification}
 
 
-\bibitem{Keras tutorial} 
+\bibitem{Keras tutorial}
 Keras tutorial
 \\\texttt{https://medium.com/@vijayabhaskar96/tutorial-image-classification\\-with-keras-flow-from-directory-and-generators-95f75ebe5720}
 
-\bibitem{Another Keras tutorial} 
+\bibitem{Another Keras tutorial}
 Another Keras tutorial
 \\\texttt{https://machinelearningmastery.com/tutorial-\\first-neural-network-python-keras/}
 
-\bibitem{Doubts resolution} 
+\bibitem{Doubts resolution}
 Doubts resolution
 \\\texttt{https://stackoverflow.com/}
 

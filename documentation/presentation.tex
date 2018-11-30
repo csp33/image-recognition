@@ -1,10 +1,11 @@
 \documentclass{beamer}
-\usepackage[outputdir=build]{minted}
+\usepackage{minted}
 \usepackage[skins,minted,breakable]{tcolorbox}
 \usepackage[english]{babel}
 \usepackage{subcaption}
 \usetikzlibrary{matrix,backgrounds}
 \usepackage{multirow}
+\usepackage{hyperref}
 \usepackage{multicol}
 \usepackage{adjustbox}
 \usepackage{soul}
@@ -23,7 +24,10 @@
 \setbeamerfont{subsection in toc}{size=\scriptsize}
 \setbeamerfont{subsubsection in toc}{size=\tiny}
 
-\usetikzlibrary{arrows,positioning,automata,shadows,fit,shapes,calc}
+\hypersetup{
+    urlcolor=cyan           % color of external links
+}
+
 
 
 
@@ -84,6 +88,24 @@
 
 \section{Description of the task}
 
+\begin{frame}[fragile]{Description of the task}
+ \vspace{1.8cm}
+ \begin{enumerate}
+  \item Convolutional neural network.
+  \item Keras framework with TensorFlow backend.
+  \item Python 3.6.
+  \item NVIDIA 960M GPU (1 505 GFLOPS).
+ \end{enumerate}
+ \vspace{1.6cm}
+ \begin{figure}[H]
+  \includegraphics[scale=0.17]{img/keras.jpg}
+  \hspace{0.8cm}
+  \includegraphics[scale=0.03]{img/python.png}  \hspace{1cm}
+  \includegraphics[scale=0.1]{img/cuda.jpg}
+ \end{figure}
+
+\end{frame}
+
 \section{Dataset}
 \begin{frame}[fragile]{CIFAR100}
  \begin{enumerate}
@@ -99,68 +121,267 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{CIFAR100}
+\begin{frame}[fragile]{Classes in the dataset}
  \begin{table}
   \centering
-  \begin{tabular}{|c|c|}
-   \hline
-   aquatic mammals                & beaver, dolphin, otter, seal, whale                   \\
-   \hline
-   fish                           & aquarium fish, flatfish, ray, shark, trout            \\
-   \hline
+  \scalebox{0.7}{
+   \begin{tabular}{|c|c|}
+    \hline
+    aquatic mammals                & beaver, dolphin, otter, seal, whale                   \\
+    \hline
+    fish                           & aquarium fish, flatfish, ray, shark, trout            \\
+    \hline
 
-   flowers                        & orchids, poppies, roses, sunflowers, tulips           \\
-   \hline
-   food containers                & bottles, bowls, cans, cups, plates                    \\
-   \hline
-   fruit and vegetables           & apples, mushrooms, oranges, pears, sweet peppers      \\
-   \hline
-   household electrical devices   & clock, computer keyboard, lamp, telephone, television \\
-   \hline
-   household furniture            & bed, chair, couch, table, wardrobe                    \\
-   \hline
-   insects                        & bee, beetle, butterfly, caterpillar, cockroach        \\
-   \hline
-   large carnivores               & bear, leopard, lion, tiger, wolf                      \\
-   \hline
-   large man-made outdoor things  & bridge, castle, house, road, skyscraper               \\
-   \hline
-   large natural outdoor scenes   & cloud, forest, mountain, plain, sea                   \\
-   \hline
-   large omnivores and herbivores & camel, cattle, chimpanzee, elephant, kangaroo         \\
-   \hline
-   medium-sized mammals           & fox, porcupine, possum, raccoon, skunk                \\
-   \hline
-   non-insect invertebrates       & crab, lobster, snail, spider, worm                    \\
-   \hline
-   people                         & baby, boy, girl, man, woman                           \\
-   \hline
-   reptiles                       & crocodile, dinosaur, lizard, snake, turtle            \\
-   \hline
-   small mammals                  & hamster, mouse, rabbit, shrew, squirrel               \\
-   \hline
-   trees                          & maple, oak, palm, pine, willow                        \\
-   \hline
-   vehicles 1                     & bicycle, bus, motorcycle, pickup truck, train         \\
-   \hline
-   vehicles 2                     & lawn-mower, rocket, streetcar, tank, tractor          \\
-   \hline
-  \end{tabular}
+    flowers                        & orchids, poppies, roses, sunflowers, tulips           \\
+    \hline
+    food containers                & bottles, bowls, cans, cups, plates                    \\
+    \hline
+    fruit and vegetables           & apples, mushrooms, oranges, pears, sweet peppers      \\
+    \hline
+    household electrical devices   & clock, computer keyboard, lamp, telephone, television \\
+    \hline
+    household furniture            & bed, chair, couch, table, wardrobe                    \\
+    \hline
+    insects                        & bee, beetle, butterfly, caterpillar, cockroach        \\
+    \hline
+    large carnivores               & bear, leopard, lion, tiger, wolf                      \\
+    \hline
+    large man-made outdoor things  & bridge, castle, house, road, skyscraper               \\
+    \hline
+    large natural outdoor scenes   & cloud, forest, mountain, plain, sea                   \\
+    \hline
+    large omnivores and herbivores & camel, cattle, chimpanzee, elephant, kangaroo         \\
+    \hline
+    medium-sized mammals           & fox, porcupine, possum, raccoon, skunk                \\
+    \hline
+    non-insect invertebrates       & crab, lobster, snail, spider, worm                    \\
+    \hline
+    people                         & baby, boy, girl, man, woman                           \\
+    \hline
+    reptiles                       & crocodile, dinosaur, lizard, snake, turtle            \\
+    \hline
+    small mammals                  & hamster, mouse, rabbit, shrew, squirrel               \\
+    \hline
+    trees                          & maple, oak, palm, pine, willow                        \\
+    \hline
+    vehicles 1                     & bicycle, bus, motorcycle, pickup truck, train         \\
+    \hline
+    vehicles 2                     & lawn-mower, rocket, streetcar, tank, tractor          \\
+    \hline
+   \end{tabular}
+  }
  \end{table}
 
 \end{frame}
 
 
+\section{Preprocessing}
+
+\begin{frame}[fragile]{Preprocessing (I)}
+ \begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.45]{img/image_augmentation.png}
+ \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Preprocessing (II)}
+ \begin{figure}[H]
+  \centering
+  \begin{minted}[fontsize=\small]{python}
+   datagen = ImageDataGenerator(
+       featurewise_center=False,
+       samplewise_center=False,
+       featurewise_std_normalization=False,
+       samplewise_std_normalization=False,
+       zca_whitening=False,
+       rotation_range=0,
+       width_shift_range=0.1,
+       height_shift_range=0.1,
+       horizontal_flip=True,
+       vertical_flip=True)
+   \end{minted}
+ \end{figure}
+\end{frame}
+
+\section{Structure of the net}
+
+\begin{frame}[fragile]{Structure of the net (I)}
+ \begin{multicols}{2}
+
+  \begin{enumerate}
+   \item<+-> Convolutional layer (128 filters)
+   \item<+-> Convolutional layer (128 filters)
+   \item<+-> Max Pooling layer (2x2)
+   \item<+-> Dropout layer
+   \item<+-> Convolutional layer (256 filters)
+   \item<+-> Convolutional layer (256 filters)
+   \item<+-> Max Pooling layer (2x2)
+   \item<+-> Dropout layer
+   \item<+-> Convolutional layer (512 filters)
+   \item<+-> Convolutional layer (512 filters)
+   \item<+-> Max Pooling layer (2x2)
+   \item<+-> Dropout layer
+   \item<+-> Flatten layer
+   \item<+-> Fully connected layer (1024 neurons)
+   \item<+-> Dropout layer
+   \item<+-> Output layer (10 neurons)
+  \end{enumerate}
+ \end{multicols}
+
+
+\end{frame}
+
+\begin{frame}[fragile]{Structure of the net (II)}
+ \begin{minted}[fontsize=\scriptsize,breaklines=true]{python}
+  model = Sequential()
+
+  model.add(Conv2D(128, (3, 3), padding='same',
+                   input_shape=x_train.shape[1:], activation='elu'))
+  model.add(Conv2D(128, (3, 3), activation='elu'))
+  model.add(MaxPooling2D(pool_size=(2, 2)))
+  model.add(Dropout(0.25))
+
+  model.add(Conv2D(256, (3, 3), padding='same', activation='elu'))
+  model.add(Conv2D(256, (3, 3), activation='elu'))
+  model.add(MaxPooling2D(pool_size=(2, 2)))
+  model.add(Dropout(0.25))
+
+  model.add(Conv2D(512, (3, 3), padding='same', activation='elu'))
+  model.add(Conv2D(512, (3, 3), activation='elu'))
+  model.add(MaxPooling2D(pool_size=(2, 2)))
+  model.add(Dropout(0.25))
+
+  model.add(Flatten())
+  model.add(Dense(1024, activation='elu'))
+  model.add(Dropout(0.5))
+  model.add(Dense(parameters.NUM_CLASSES, activation='softmax'))
+
+  \end{minted}
+\end{frame}
+
 \section{Neural network development}
 
-\subsection{Preprocessing}
+\begin{frame}[fragile]{Neural network development}
+ \begin{enumerate}
+  \item<+-> Calibration of parameters.
+        \begin{enumerate}
+         \item<+-> Learning rate.
+         \item<+-> Number of epochs.
+         \item<+-> Batch size.
+        \end{enumerate}
+  \item<+-> Find the maximum global accuracy.
+ \end{enumerate}
+\end{frame}
 
-\subsection{Structure of the net}
+\begin{frame}[fragile]{200 epochs training}
+ \begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.55]{img/accuracy.png}
+ \end{figure}
+\end{frame}
+\begin{frame}[fragile]{200 epochs training}
+ \begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{img/accuracy_arrow.png}
+ \end{figure}
+\end{frame}
 
-\subsection{First version}
 
-\subsection{Final version}
+
+\begin{frame}[fragile]{139 epochs training}
+ \begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.55]{img/accuracy_139.png}
+ \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]{139 epochs training}
+ \begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.55]{img/loss_139.png}
+ \end{figure}
+\end{frame}
+
+
+
+\section{Final results}
+
+\begin{frame}[fragile]{139 epochs training}
+ \begin{enumerate}
+  \item Validation accuracy: 0.6187 \%
+  \item Validation loss: 1.5597 \%
+ \end{enumerate}
+\end{frame}
 
 \section{Examples}
+
+\begin{frame}[fragile]{Crocodile prediction}
+ \scalebox{0.8}{
+  \begin{minipage}{\textwidth}
+   \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.25]{crocodile.jpg}
+    \hspace{2em}
+    \includegraphics[scale=0.4]{crocodile_prediction.jpg}
+   \end{figure}
+  \end{minipage}
+ }
+\end{frame}
+
+\begin{frame}[fragile]{Bee prediction}
+ \scalebox{0.8}{
+  \begin{minipage}{\textwidth}
+   \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{bee.png}
+    \hspace{2em}
+    \includegraphics[scale=0.5]{bee_prediction.png}
+   \end{figure}
+  \end{minipage}
+ }
+\end{frame}
+
+\begin{frame}[fragile]{Porcupine prediction}
+ \scalebox{0.8}{
+  \begin{minipage}{\textwidth}
+   \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45]{porcupine.jpg}
+    \hspace{2em}
+    \includegraphics[scale=0.5]{porcupine_prediction.png}
+   \end{figure}
+  \end{minipage}
+ }
+\end{frame}
+
+\begin{frame}[fragile]{Bear prediction}
+ \scalebox{0.8}{
+  \begin{minipage}{\textwidth}
+   \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.15]{bear.jpg}
+    \hspace{2em}
+    \includegraphics[scale=0.45]{bear_prediction.png}
+   \end{figure}
+  \end{minipage}
+ }
+\end{frame}
+
+
+\begin{frame}[fragile]
+ \begin{center}
+  \Huge
+  Thanks for your attention!
+ \end{center}
+ \vspace{2cm}
+ Source code available at \textcolor{blue}{\url{http://www.github.com/csp98}}
+ \vspace{1cm}
+ \begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.05]{github-mark.png}
+ \end{figure}
+
+\end{frame}
 
 \end{document}
