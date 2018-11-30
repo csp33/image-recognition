@@ -107,9 +107,6 @@ venv.bak/
 *meta*
 *image_recognition*
 *checkpoint*
-#Images
-*.jpg
-*.png
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
